@@ -1,0 +1,32 @@
+
+.tile-trees
+{
+	background-image: url(../_img/tile-trees-240x240.svg);
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-size: 240px 240px;
+}
+
+.tile-grass
+{
+	background-image: url(../_img/tile-grass-240x240.svg);
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-size: 240px 240px;
+}
+
+.tile-ground
+{
+	background-image: url(../_img/tile-ground-40x40.svg);
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-size: 40px 40px;
+}
+
+.tile-lines
+{
+	background-image: url(../_img/tile-lines-40x40.svg);
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-size: 40px 40px;
+}
