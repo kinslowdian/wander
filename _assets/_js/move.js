@@ -83,9 +83,17 @@ function init_player()
 	thePlayer.spriteX = document.querySelector('.player-x');
 	thePlayer.spriteY = document.querySelector('.player-y');
 	thePlayer.pos = new Array();
+	thePlayer.posSafe = new Array();
 	thePlayer.pos[0] = 0;
 	thePlayer.pos[1] = 0;
+	thePlayer.posSafe[0] = 0;
+	thePlayer.posSafe[1] = 0;
 	thePlayer.move_listen = false;
+	thePlayer.hit = false;
+	thePlayer.interact = null;
+
+	// TODO
+	test();
 
 	// thePlayer.spriteX.addEventListener("transitionend", event_move, false);
 	// thePlayer.spriteY.addEventListener("transitionend", event_move, false);
@@ -109,7 +117,7 @@ function cancel_control()
 
 function event_control(event)
 {
-	if(event.type === "keydown" && !thePlayer.move_listen)
+	if(event.type === "keydown" && !thePlayer.hit)
 	{
 		// thePlayer.move_listen = true;
 
@@ -146,7 +154,43 @@ function event_control(event)
 		}
 	}
 
+	update_control_check();
+}
 
+function update_control_check()
+{
+	thePlayer.hit = hitTest();
+
+	if(thePlayer.hit)
+	{
+		if(thePlayer.interact != null)
+		{
+			if(thePlayer.interact.overlap)
+			{
+
+			}
+
+			else
+			{
+				thePlayer.pos[0] = thePlayer.posSafe[0];
+				thePlayer.pos[1] = thePlayer.posSafe[1];
+			}
+
+			interactWithWorld();
+		}
+
+		else
+		{
+			thePlayer.pos[0] = thePlayer.posSafe[0];
+			thePlayer.pos[1] = thePlayer.posSafe[1];
+		}
+	}
+
+	else
+	{
+		thePlayer.posSafe[0] = thePlayer.pos[0];
+		thePlayer.posSafe[1] = thePlayer.pos[1];
+	}
 }
 
 function update_control()
@@ -174,6 +218,15 @@ function update_control()
 function event_move(event)
 {
 	thePlayer.move_listen = false;
+}
+
+function interactWithWorld()
+{
+	if(thePlayer.interact.hitType === "ENEMY")
+	{
+		trace(thePlayer.interact.hitPrefs.name);
+		trace(thePlayer.interact.hitPrefs.character);
+	}
 }
 
 

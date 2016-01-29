@@ -1,0 +1,53 @@
+.wood-0
+{
+	width: 160px;
+	height: 80px;
+
+	position: absolute;
+
+	transform: translate(0px, 80px);
+}
+
+.wood-1
+{
+	width: 160px;
+	height: 80px;
+
+	position: absolute;
+
+	transform: translate(0px, 240px);
+}
+
+.wood-2
+{
+	width: 160px;
+	height: 80px;
+
+	position: absolute;
+
+	transform: translate(0px, 400px);
+}
+
+.wood-3
+{
+	width: 160px;
+	height: 160px;
+
+	position: absolute;
+
+	transform: translate(320px, 80px);
+}
+
+.enemy-0
+{
+	width: 40px;
+	height: 40px;
+
+	background: #ff3333;
+
+	position: absolute;
+
+	transform: translate(520px, 80px);
+}
+
+
