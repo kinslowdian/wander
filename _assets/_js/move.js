@@ -80,22 +80,29 @@ function init_player()
 {
 	thePlayer = {};
 	thePlayer.sprite = document.querySelector('#character');
+	thePlayer.spriteX = document.querySelector('.player-x');
+	thePlayer.spriteY = document.querySelector('.player-y');
 	thePlayer.pos = new Array();
 	thePlayer.pos[0] = 0;
 	thePlayer.pos[1] = 0;
 	thePlayer.move_listen = false;
 
-	thePlayer.sprite.addEventListener("transitionend", event_move, false)
+	// thePlayer.spriteX.addEventListener("transitionend", event_move, false);
+	// thePlayer.spriteY.addEventListener("transitionend", event_move, false);
 }
 
 function init_control()
 {
+	window.requestAnimationFrame(update_control);
+
 	window.addEventListener("keydown", event_control, false);
 	window.addEventListener("keyup", event_control, false);
 }
 
 function cancel_control()
 {
+	window.cancelAnimationFrame(update_control);
+
 	window.removeEventListener("keydown", event_control, false);
 	window.removeEventListener("keyup", event_control, false);
 }
@@ -104,40 +111,65 @@ function event_control(event)
 {
 	if(event.type === "keydown" && !thePlayer.move_listen)
 	{
-		thePlayer.move_listen = true;
+		// thePlayer.move_listen = true;
 
 		// U
 		if(event.keyCode == 38)
 		{
 			thePlayer.pos[1] -= 40;
+
+			// update_control("y");
 		}
 
 		// D
 		else if(event.keyCode == 40)
 		{
 			thePlayer.pos[1] += 40;
+
+			// update_control("y");
 		}
 
 		// L
 		else if(event.keyCode == 37)
 		{
 			thePlayer.pos[0] -= 40;
+
+			// update_control("x");
 		}
 
 		// R
 		else if(event.keyCode == 39)
 		{
 			thePlayer.pos[0] += 40;
+
+			// update_control("x");
 		}
 	}
 
-	update_control();
+
 }
 
 function update_control()
 {
-	thePlayer.sprite.style.transform = 'translate(' + thePlayer.pos[0] + 'px, ' + thePlayer.pos[1] + 'px)';
+	thePlayer.spriteX.style.transform = 'translateX(' + thePlayer.pos[0] + 'px)';
+
+	thePlayer.spriteY.style.transform = 'translateY(' + thePlayer.pos[1] + 'px)';
+
+	window.requestAnimationFrame(update_control);
 }
+
+// function update_control(axis)
+// {
+// 	if(axis === "x")
+// 	{
+// 		thePlayer.spriteX.style.transform = 'translateX(' + thePlayer.pos[0] + 'px)';
+// 	}
+
+// 	if(axis === "y")
+// 	{
+// 		thePlayer.spriteY.style.transform = 'translateY(' + thePlayer.pos[1] + 'px)';
+// 	}
+// }
 
 function event_move(event)
 {
