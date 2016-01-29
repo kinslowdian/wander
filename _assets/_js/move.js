@@ -83,6 +83,9 @@ function init_player()
 	thePlayer.pos = new Array();
 	thePlayer.pos[0] = 0;
 	thePlayer.pos[1] = 0;
+	thePlayer.move_listen = false;
+
+	thePlayer.sprite.addEventListener("transitionend", event_move, false)
 }
 
 function init_control()
@@ -99,8 +102,10 @@ function cancel_control()
 
 function event_control(event)
 {
-	if(event.type === "keydown")
+	if(event.type === "keydown" && !thePlayer.move_listen)
 	{
+		thePlayer.move_listen = true;
+
 		// U
 		if(event.keyCode == 38)
 		{
@@ -132,6 +137,11 @@ function event_control(event)
 function update_control()
 {
 	thePlayer.sprite.style.transform = 'translate(' + thePlayer.pos[0] + 'px, ' + thePlayer.pos[1] + 'px)';
+}
+
+function event_move(event)
+{
+	thePlayer.move_listen = false;
 }
 
 
