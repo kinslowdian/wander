@@ -30,3 +30,11 @@
 	background-position: 0 0;
 	background-size: 40px 40px;
 }
+
+.tile-field
+{
+	background-image: url(../_img/tile-field-40x40-.svg);
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-size: 40px 40px;
+}

@@ -4,6 +4,8 @@ var display;
 var el_list;
 var worldMain;
 
+var thePlayer;
+
 function init_first(event, w, h)
 {
 	trace(event);
@@ -12,6 +14,9 @@ function init_first(event, w, h)
 	init_display();
 	init_elements();
 	init_world(w, h);
+
+	init_player();
+	init_control();
 }
 
 function init_elements()
@@ -23,7 +28,6 @@ function init_elements()
 	el_list.outsideR 	= document.querySelector('#world .outside-r');
 	el_list.outsideT 	= document.querySelector('#world .outside-t');
 	el_list.outsideB 	= document.querySelector('#world .outside-b');
-
 	trace(el_list);
 }
 
@@ -70,6 +74,64 @@ function init_world(w, h)
 
 	el_list.outsideT.style.transform = 'translate(' + positioning.t[0] + 'px, ' + positioning.t[1] + 'px)';
 	el_list.outsideB.style.transform = 'translate(' + positioning.b[0] + 'px, ' + positioning.b[1] + 'px)';
+}
+
+function init_player()
+{
+	thePlayer = {};
+	thePlayer.sprite = document.querySelector('#character');
+	thePlayer.pos = new Array();
+	thePlayer.pos[0] = 0;
+	thePlayer.pos[1] = 0;
+}
+
+function init_control()
+{
+	window.addEventListener("keydown", event_control, false);
+	window.addEventListener("keyup", event_control, false);
+}
+
+function cancel_control()
+{
+	window.removeEventListener("keydown", event_control, false);
+	window.removeEventListener("keyup", event_control, false);
+}
+
+function event_control(event)
+{
+	if(event.type === "keydown")
+	{
+		// U
+		if(event.keyCode == 38)
+		{
+			thePlayer.pos[1] -= 40;
+		}
+
+		// D
+		else if(event.keyCode == 40)
+		{
+			thePlayer.pos[1] += 40;
+		}
+
+		// L
+		else if(event.keyCode == 37)
+		{
+			thePlayer.pos[0] -= 40;
+		}
+
+		// R
+		else if(event.keyCode == 39)
+		{
+			thePlayer.pos[0] += 40;
+		}
+	}
+
+	update_control();
+}
+
+function update_control()
+{
+	thePlayer.sprite.style.transform = 'translate(' + thePlayer.pos[0] + 'px, ' + thePlayer.pos[1] + 'px)';
 }
 
 
