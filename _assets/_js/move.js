@@ -119,22 +119,29 @@ function center_world()
 function init_player()
 {
 	thePlayer = {};
+
 	thePlayer.sprite = document.querySelector('#character');
 	thePlayer.spriteX = document.querySelector('.player-x');
 	thePlayer.spriteY = document.querySelector('.player-y');
+
 	thePlayer.pos = new Array();
-	thePlayer.posSafe = new Array();
 	thePlayer.pos[0] = 0;
 	thePlayer.pos[1] = 0;
+
+	thePlayer.posSafe = new Array();
 	thePlayer.posSafe[0] = 0;
 	thePlayer.posSafe[1] = 0;
+
 	thePlayer.move_listen = false;
+	thePlayer.move = 40;
+
 	thePlayer.hit = false;
 	thePlayer.interact = null;
 
 	thePlayer.size = {};
 	thePlayer.size.w = 40;
 	thePlayer.size.h = 40;
+
 
 	// TODO
 	test();
@@ -168,7 +175,7 @@ function event_control(event)
 		// U
 		if(event.keyCode == 38)
 		{
-			thePlayer.pos[1] -= 40;
+			thePlayer.pos[1] -= thePlayer.move;
 
 			// update_control("y");
 		}
@@ -176,7 +183,7 @@ function event_control(event)
 		// D
 		else if(event.keyCode == 40)
 		{
-			thePlayer.pos[1] += 40;
+			thePlayer.pos[1] += thePlayer.move;
 
 			// update_control("y");
 		}
@@ -184,7 +191,7 @@ function event_control(event)
 		// L
 		else if(event.keyCode == 37)
 		{
-			thePlayer.pos[0] -= 40;
+			thePlayer.pos[0] -= thePlayer.move;
 
 			// update_control("x");
 		}
@@ -192,7 +199,7 @@ function event_control(event)
 		// R
 		else if(event.keyCode == 39)
 		{
-			thePlayer.pos[0] += 40;
+			thePlayer.pos[0] += thePlayer.move;
 
 			// update_control("x");
 		}
