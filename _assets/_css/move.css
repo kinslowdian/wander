@@ -74,6 +74,11 @@ html, body
 	margin: 0 auto;
 }
 
+.tween-world
+{
+	transition: transform 2s ease-in-out;
+}
+
 .outside
 {
 	width: inherit;

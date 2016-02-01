@@ -6,10 +6,13 @@ var worldMain;
 
 var thePlayer;
 
+var updateGame;
+
 function init_first(event, w, h)
 {
 	trace(event);
 	trace(window);
+	trace(window.innerHeight);
 
 	init_display();
 	init_elements();
@@ -34,11 +37,38 @@ function init_elements()
 function init_display()
 {
 	display = {};
-	display.screenSize = {};
-	display.screenSize.w = window.screen.width;
-	display.screenSize.h = window.screen.height;
+
+	display.screenSize 		= {};
+	display.screenSize.w 	= window.screen.width;
+	display.screenSize.h 	= window.screen.height;
+
+	display.viewSize 			= {};
+	display.viewSize.w 		= window.innerWidth;
+	display.viewSize.h 		= window.innerHeight;
+
+	window.addEventListener("resize", event_resize, false);
+
+	init_updateGame();
 
 	trace(display);
+}
+
+function init_updateGame()
+{
+	updateGame = setTimeout(center_world, 1200);
+}
+
+function cancel_updateGame()
+{
+	clearTimeout(updateGame);
+}
+
+function event_resize(event)
+{
+	display.viewSize.w = window.innerWidth;
+	display.viewSize.h = window.innerHeight;
+
+	trace(display.viewSize.w + " x " + display.viewSize.h);
 }
 
 function init_world(w, h)
@@ -76,6 +106,16 @@ function init_world(w, h)
 	el_list.outsideB.style.transform = 'translate(' + positioning.b[0] + 'px, ' + positioning.b[1] + 'px)';
 }
 
+function center_world()
+{
+	var cx = -(thePlayer.pos[0]) + ((worldMain.w * 0.5) - (thePlayer.size.w * 0.5));
+	var cy = -(thePlayer.pos[1]) + ((display.viewSize.h * 0.5) - (thePlayer.size.h * 0.5));
+
+	el_list.world.style.transform = 'translate(' + cx + 'px, ' + cy + 'px)';
+
+	init_updateGame();
+}
+
 function init_player()
 {
 	thePlayer = {};
@@ -91,6 +131,10 @@ function init_player()
 	thePlayer.move_listen = false;
 	thePlayer.hit = false;
 	thePlayer.interact = null;
+
+	thePlayer.size = {};
+	thePlayer.size.w = 40;
+	thePlayer.size.h = 40;
 
 	// TODO
 	test();
@@ -228,6 +272,9 @@ function interactWithWorld()
 		trace(thePlayer.interact.hitPrefs.character);
 	}
 }
+
+
+
 
 
 
